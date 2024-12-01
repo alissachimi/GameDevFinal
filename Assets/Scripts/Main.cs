@@ -17,7 +17,9 @@ public class Main : MonoBehaviour
     public Image life2Img;
     public Image life3Img;
 
-    public GameObject bee;
+    public GameObject beePrefab; // Use a prefab reference
+    private GameObject beeInstance;
+    public Button startButton;
     
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,8 @@ public class Main : MonoBehaviour
         S = this;
         scoreSlider.maxValue = 500;
         livesRemaining = 3;
+        beeInstance = Instantiate(beePrefab);
+        beeInstance.SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,6 +56,16 @@ public class Main : MonoBehaviour
             Destroy(life3Img);
         }
 
-        bee.transform.position = Vector3.up;
+        beeInstance.SetActive(false);
+        startButton.gameObject.SetActive(true);
     }
+
+    public void StartButtonClick(){
+        beeInstance.transform.position = startButton.transform.position;
+        beeInstance.SetActive(true);
+        startButton.gameObject.SetActive(false);
+        
+    }
+
+
 }

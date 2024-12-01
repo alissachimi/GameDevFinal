@@ -7,7 +7,6 @@ public class Bee : MonoBehaviour
 {
 
     private HashSet<int> processedBalloons = new HashSet<int>();
-    private HashSet<int> cooldownEnemies = new HashSet<int>();
     public float collisionCooldown = .5f;
 
     // Update is called once per frame
@@ -37,21 +36,7 @@ public class Bee : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            int objectId = collision.gameObject.GetInstanceID();
-
-            // Ensure each enemy collision is only processed once per cooldown period
-            if (!cooldownEnemies.Contains(objectId))
-            {
-                cooldownEnemies.Add(objectId);
-                Main.S.EnemyCollision();
-                StartCoroutine(CooldownEnemyCollision(objectId));
-            }
+            Main.S.EnemyCollision();
         }
-    }
-
-    private IEnumerator CooldownEnemyCollision(int enemyId)
-    {
-        yield return new WaitForSeconds(collisionCooldown);
-        cooldownEnemies.Remove(enemyId);
     }
 }
