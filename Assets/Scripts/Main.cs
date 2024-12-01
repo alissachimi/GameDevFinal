@@ -20,6 +20,7 @@ public class Main : MonoBehaviour
     public GameObject beePrefab; // Use a prefab reference
     private GameObject beeInstance;
     public Button startButton;
+    private bool firstClick = true;
     
     // Start is called before the first frame update
     void Start()
@@ -44,15 +45,14 @@ public class Main : MonoBehaviour
     }
 
     public void EnemyCollision(){
-        livesRemaining-=1;
-        if(livesRemaining==0){
+        if(livesRemaining==1 && life1Img){
             SwitchScene("End");
             Destroy(life1Img);
         }
-        if(livesRemaining==1){
+        if(livesRemaining==2 && life2Img){
             Destroy(life2Img);
         }
-        if(livesRemaining==2){
+        if(livesRemaining==3 && life3Img){
             Destroy(life3Img);
         }
 
@@ -61,6 +61,15 @@ public class Main : MonoBehaviour
     }
 
     public void StartButtonClick(){
+        
+        // remove a life here instead of in EnemyCollision to avoid multiple lives getting lost error
+        if(!firstClick){
+            livesRemaining-=1;
+        } else {
+            firstClick = false;
+        }
+
+        // recreate bee at the location of the start button
         beeInstance.transform.position = startButton.transform.position;
         beeInstance.SetActive(true);
         startButton.gameObject.SetActive(false);

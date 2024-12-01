@@ -7,7 +7,6 @@ public class Bee : MonoBehaviour
 {
 
     private HashSet<int> processedBalloons = new HashSet<int>();
-    public float collisionCooldown = .5f;
 
     // Update is called once per frame
     void Update()
