@@ -7,7 +7,6 @@ public class Bee : MonoBehaviour
 {
 
     private HashSet<int> processedBalloons = new HashSet<int>();
-
     // Update is called once per frame
     void Update()
     {
@@ -16,9 +15,10 @@ public class Bee : MonoBehaviour
         mouseScreenPosition.z = -Camera.main.transform.position.z;
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
         transform.position = mouseWorldPosition;
+        
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Balloon"))
         {
@@ -38,4 +38,6 @@ public class Bee : MonoBehaviour
             Main.S.EnemyCollision();
         }
     }
+
+
 }
