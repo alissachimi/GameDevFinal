@@ -1,21 +1,62 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bee : MonoBehaviour
 {
 
     private HashSet<int> processedBalloons = new HashSet<int>();
+    private PolygonCollider2D boundaryCollider;
+
+    void Start(){
+        boundaryCollider = GameObject.Find("maze1").GetComponent<PolygonCollider2D>();
+    }
+
     // Update is called once per frame
     void Update()
+
     {
-        // get mouse position and set bee to it
-        Vector3 mouseScreenPosition = Input.mousePosition;
-        mouseScreenPosition.z = -Camera.main.transform.position.z;
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-        transform.position = mouseWorldPosition;
-        
+
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector2 newPosition = transform.position;
+
+        newPosition = new Vector2(mousePosition.x, mousePosition.y);
+
+
+
+        // Check for collision with boundary
+
+        if (!boundaryCollider.OverlapPoint(newPosition))
+
+        {
+            Debug.Log("has collided");
+
+            // If collision detected, adjust the position to stay within bounds
+
+            newPosition = ClampPositionToBounds(newPosition, boundaryCollider);
+
+        }
+
+
+
+        transform.position = newPosition;
+
+    }
+
+
+
+    // Helper function to clamp the player position within the collider bounds
+
+    Vector3 ClampPositionToBounds(Vector3 newPosition, Collider2D boundary)
+    {
+        // Get the closest point on the polygon collider to the new position
+        Vector2 closestPoint = boundary.ClosestPoint(newPosition);
+
+        // Return the closest point as the new position if the new position is outside the collider
+        return closestPoint;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

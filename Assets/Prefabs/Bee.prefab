@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6825928228150488613}
   - component: {fileID: 6906382799331824371}
   - component: {fileID: 8590134966575139704}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eye (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 5098056141905088867}
   - component: {fileID: 7795758740349451140}
   - component: {fileID: 8129764935065155090}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: line (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 6329103974934162275}
   - component: {fileID: 2707662328913320689}
   - component: {fileID: 3046930981709431820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 4656013421345120379}
   - component: {fileID: 6028053975353240880}
   - component: {fileID: 3265060985768143186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bee
   m_TagString: Bee
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.46390373, y: 0.5336603, z: -0.46390373, w: 0.5336603}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2132513652075705041}
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 8552352336093835148}
   - component: {fileID: 3035344520967866691}
   - component: {fileID: 8144768247805452467}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: line (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 4274291757259894635}
   - component: {fileID: 7561129884747769970}
   - component: {fileID: 7040871304564500495}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,7 +655,7 @@ GameObject:
   - component: {fileID: 2911605018385258677}
   - component: {fileID: 4401013382203752541}
   - component: {fileID: 7616954340885904046}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stinger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -762,7 +762,7 @@ GameObject:
   - component: {fileID: 4651149043345121387}
   - component: {fileID: 5998846669620008879}
   - component: {fileID: 7316716803450765128}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wing (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -867,7 +867,7 @@ GameObject:
   - component: {fileID: 3772490171691344801}
   - component: {fileID: 2916369882242748877}
   - component: {fileID: 3467433114749123586}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -972,7 +972,7 @@ GameObject:
   - component: {fileID: 7163883282700996609}
   - component: {fileID: 1849426535028318332}
   - component: {fileID: 3500973596729420388}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1077,7 +1077,7 @@ GameObject:
   - component: {fileID: 7516577150825683130}
   - component: {fileID: 4070426777995186158}
   - component: {fileID: 4856372837569777667}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: line (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
