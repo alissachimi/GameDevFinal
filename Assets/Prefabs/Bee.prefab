@@ -371,6 +371,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f2a0a4c335513419546d281c62b5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistance: 5
+  mazeLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!70 &6028053975353240880
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -70,7 +70,7 @@ public class Main : MonoBehaviour
         }
 
         // recreate bee at the location of the start button
-        beeInstance.transform.position = startButton.transform.position;
+        beeInstance.transform.position = Vector3.up;
         beeInstance.SetActive(true);
         startButton.gameObject.SetActive(false);
         

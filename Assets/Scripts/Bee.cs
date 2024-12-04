@@ -8,42 +8,26 @@ public class Bee : MonoBehaviour
 {
 
     private HashSet<int> processedBalloons = new HashSet<int>();
-    private PolygonCollider2D boundaryCollider;
 
-    void Start(){
-        boundaryCollider = GameObject.Find("maze1").GetComponent<PolygonCollider2D>();
-    }
+    public LayerMask mazeLayerMask; // Layer mask for the maze
 
-    // Update is called once per frame
     void Update()
-
     {
-
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 currentPosition = transform.position;
 
-        Vector2 newPosition = transform.position;
+        Vector2 direction = (mousePosition - currentPosition).normalized;
+        float distance = Vector2.Distance(mousePosition, currentPosition);
 
-        newPosition = new Vector2(mousePosition.x, mousePosition.y);
-
-
-
-        // Check for collision with boundary
-
-        if (!boundaryCollider.OverlapPoint(newPosition))
-
+        // Raycast to check if there is a wall between the bee and the mouse position
+        RaycastHit2D hit = Physics2D.Raycast(currentPosition, direction, distance, mazeLayerMask);
+        if (hit.collider != null)
         {
-            Debug.Log("has collided");
-
-            // If collision detected, adjust the position to stay within bounds
-
-            newPosition = ClampPositionToBounds(newPosition, boundaryCollider);
-
+            // Wall detected, stop the bee from moving through the wall
+            return;
         }
 
-
-
-        transform.position = newPosition;
-
+        transform.position = mousePosition;
     }
 
 
