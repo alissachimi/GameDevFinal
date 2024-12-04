@@ -55,11 +55,20 @@ public class Bee : MonoBehaviour
                 processedBalloons.Add(objectId);
                 Destroy(collision.gameObject);
                 Main.S.score += 10;
+                Main.S.numBalloonsPopped += 1;
+                
+                // update player prefs if needed
+                if (Main.S.score > PlayerPrefs.GetInt("HighScore")){
+                    PlayerPrefs.SetInt("HighScore", Main.S.score);
+                }
             }
         }
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Bomb")){
+                Destroy(collision.gameObject);
+            }
             Main.S.EnemyCollision();
         }
     }
