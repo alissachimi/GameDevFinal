@@ -27,10 +27,10 @@ public class Main : MonoBehaviour
 
     // levels variables
     private int maxBalloonsForCurLevel;
-    private int[] totalNumBalloons = {32, 44, 54};
+    private int[] totalNumBalloons = {32, 44, 54, 1};
     public int numBalloonsPopped = 0;
     private int curLevel = 0;
-    private int lastLevel = 2;
+    private int lastLevel = 3;
     public GameObject[] levelObjects;
 
     public Button [] startButtons;
