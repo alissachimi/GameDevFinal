@@ -27,7 +27,7 @@ public class Main : MonoBehaviour
 
     // levels variables
     private int maxBalloonsForCurLevel;
-    private int[] totalNumBalloons = {32, 44, 54, 1};
+    private int[] totalNumBalloons = {32, 44, 54, 23};
     public int numBalloonsPopped = 0;
     private int curLevel = 0;
     private int lastLevel = 3;
@@ -120,6 +120,7 @@ public class Main : MonoBehaviour
         
         // remove a life here instead of in EnemyCollision to avoid multiple lives getting lost error
         if(!firstClick){
+            score-=25;
             livesRemaining-=1;
         } else {
             firstClick = false;

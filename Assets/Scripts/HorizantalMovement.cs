@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HorizantalMovement : MonoBehaviour
 {
-    private float speed = 1.0f; // Speed of the movement
-    private float distance = 1.3f; // Distance of the movement
+    public float speed = 1.0f; // Speed of the movement
+    public float distance = 1.3f; // Distance of the movement
 
     private Vector3 startPosition;
     private float elapsedTime = 0.0f;
