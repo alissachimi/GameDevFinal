@@ -15,10 +15,12 @@ public class MoveUpDown : MonoBehaviour
 
     void Update()
     {
-        // Calculate the new Y position using Mathf.PingPong
-        float newY = startPosition.y + Mathf.PingPong(Time.time * speed, height * 2) - height;
+        if (Main.S.paused == false){
+            // Calculate the new Y position using Mathf.PingPong
+            float newY = startPosition.y + Mathf.PingPong(Time.time * speed, height * 2) - height;
 
-        // Set the object's position
-        transform.position = new Vector3(startPosition.x, newY, startPosition.z);
+            // Set the object's position
+            transform.position = new Vector3(startPosition.x, newY, startPosition.z);
+        }
     }
 }

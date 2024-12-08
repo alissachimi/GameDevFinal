@@ -6,6 +6,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using System;
+using UnityEngine.Networking;
+using TMPro;
 
 
 public class Main : MonoBehaviour
@@ -19,6 +22,8 @@ public class Main : MonoBehaviour
     public Image life1Img;
     public Image life2Img;
     public Image life3Img;
+
+    public bool paused;
 
     public GameObject beePrefab; // Use a prefab reference
     private GameObject beeInstance;
@@ -40,7 +45,7 @@ public class Main : MonoBehaviour
     {
         score = 0;
         S = this;
-
+        S.paused = false;
         // max score would be total number of balloons * 10 pts per balloon popped
         scoreSlider.maxValue = totalNumBalloons.Sum() * 10;
 
@@ -50,16 +55,23 @@ public class Main : MonoBehaviour
 
         startButton = startButtons[0];
         maxBalloonsForCurLevel = totalNumBalloons[0];
+
+        string startTime = DateTime.Now.ToString();
+        PlayerPrefs.SetString("GameStartTime", startTime);
+        PlayerPrefs.Save();
+        Debug.Log("Game started at: " + startTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = score + " Points";
-        scoreSlider.value = score;
+        if (paused == false){
+            scoreText.text = score + " Points";
+            scoreSlider.value = score;
 
-        if(maxBalloonsForCurLevel == numBalloonsPopped){
-            IncreaseLevel();
+            if(maxBalloonsForCurLevel == numBalloonsPopped){
+                IncreaseLevel();
+            }
         }
     }
 
@@ -84,7 +96,7 @@ public class Main : MonoBehaviour
     }
 
     private void IncreaseLevel() {
-
+        StartCoroutine(SetLevel(PlayerPrefs.GetInt("userId"), curLevel+1));
         // end game if we've done all of the levels
         if(curLevel == lastLevel){
             SceneManager.LoadScene("End");
@@ -118,20 +130,42 @@ public class Main : MonoBehaviour
 
     public void StartButtonClick(){
         
-        // remove a life here instead of in EnemyCollision to avoid multiple lives getting lost error
-        if(!firstClick){
-            score-=25;
-            livesRemaining-=1;
-        } else {
-            firstClick = false;
-        }
+        if (S.paused == false) {
+            // remove a life here instead of in EnemyCollision to avoid multiple lives getting lost error
+            if(!firstClick){
+                score-=25;
+                livesRemaining-=1;
+            } else {
+                firstClick = false;
+            }
 
-        // recreate bee at the location of the start button
-        beeInstance.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        beeInstance.SetActive(true);
-        startButton.gameObject.SetActive(false);
-        
+            // recreate bee at the location of the start button
+            beeInstance.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            beeInstance.SetActive(true);
+            startButton.gameObject.SetActive(false);
+        }
     }
 
+    public void PauseButtonClick(){
+        S.paused = !S.paused;;
+    }
 
+    IEnumerator SetLevel(int userId, int level)
+    {
+        // Create a form object to hold the login data
+        WWWForm form = new WWWForm();
+        form.AddField("setLevelId", userId);
+        form.AddField("setLevel", level);
+
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/game-dev-final-project/level.php", form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+            {
+                // Display connection error
+                Debug.LogError($"Error: {www.error}");
+            }
+        }
+    }
 }

@@ -13,21 +13,23 @@ public class Bee : MonoBehaviour
 
     void Update()
     {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 currentPosition = transform.position;
+        if (Main.S.paused == false){
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 currentPosition = transform.position;
 
-        Vector2 direction = (mousePosition - currentPosition).normalized;
-        float distance = Vector2.Distance(mousePosition, currentPosition);
+            Vector2 direction = (mousePosition - currentPosition).normalized;
+            float distance = Vector2.Distance(mousePosition, currentPosition);
 
-        // Raycast to check if there is a wall between the bee and the mouse position
-        RaycastHit2D hit = Physics2D.Raycast(currentPosition, direction, distance, mazeLayerMask);
-        if (hit.collider != null)
-        {
-            // Wall detected, stop the bee from moving through the wall
-            return;
+            // Raycast to check if there is a wall between the bee and the mouse position
+            RaycastHit2D hit = Physics2D.Raycast(currentPosition, direction, distance, mazeLayerMask);
+            if (hit.collider != null)
+            {
+                // Wall detected, stop the bee from moving through the wall
+                return;
+            }
+
+            transform.position = mousePosition;
         }
-
-        transform.position = mousePosition;
     }
 
 

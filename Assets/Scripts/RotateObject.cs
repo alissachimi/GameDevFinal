@@ -20,10 +20,12 @@ public class ConstantRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Rotate the object based on rotation speed and time
-        transform.Rotate(rotationSpeed * Time.deltaTime);
+        if (Main.S.paused == false){
+            // Rotate the object based on rotation speed and time
+            transform.Rotate(rotationSpeed * Time.deltaTime);
 
-        // Freeze the X and Y positions
-        transform.position = new Vector3(initialX, initialY, transform.position.z);
+            // Freeze the X and Y positions
+            transform.position = new Vector3(initialX, initialY, transform.position.z);
+        }
     }
 }

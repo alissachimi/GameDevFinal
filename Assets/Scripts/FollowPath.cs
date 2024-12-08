@@ -17,10 +17,11 @@ public class FollowPathWithDisappearance : MonoBehaviour
 
     void Update()
     {
-        if (waypoints.Length == 0) return;
-
-        // Move the object along the path
-        MoveAlongPath();
+        if (Main.S.paused == false){
+            if (waypoints.Length == 0) return;
+            // Move the object along the path
+            MoveAlongPath();
+        }
     }
 
     private void MoveAlongPath()

@@ -18,19 +18,21 @@ public class HorizantalMovement : MonoBehaviour
 
     void Update()
     {
-        // Update elapsed time
-        elapsedTime += Time.deltaTime * speed;
+        if (Main.S.paused == false){
+            // Update elapsed time
+            elapsedTime += Time.deltaTime * speed;
 
-        // Calculate the proportion of the journey completed (0 to 1)
-        float t = Mathf.PingPong(elapsedTime, 1.0f);
+            // Calculate the proportion of the journey completed (0 to 1)
+            float t = Mathf.PingPong(elapsedTime, 1.0f);
 
-        // Use Mathf.SmoothStep to ease the movement
-        float easedT = Mathf.SmoothStep(0.0f, 1.0f, t);
+            // Use Mathf.SmoothStep to ease the movement
+            float easedT = Mathf.SmoothStep(0.0f, 1.0f, t);
 
-        // Calculate the new X position
-        float newX = Mathf.Lerp(startPosition.x - distance, startPosition.x + distance, easedT);
+            // Calculate the new X position
+            float newX = Mathf.Lerp(startPosition.x - distance, startPosition.x + distance, easedT);
 
-        // Set the object's position
-        transform.position = new Vector3(newX, startPosition.y, startPosition.z);
+            // Set the object's position
+            transform.position = new Vector3(newX, startPosition.y, startPosition.z);
+        }
     }
 }

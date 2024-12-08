@@ -17,7 +17,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (timerIsRunning)
+        if (timerIsRunning && Main.S.paused == false)
         {
             if (timeRemaining > 0)
             {
