@@ -91,7 +91,7 @@ public class Bee : MonoBehaviour
             GameObject enemy = Instantiate(enemyColPrefab, this.transform.position, Quaternion.Euler(-90, 0, 0));
             
             Destroy(enemy, 1.5f);
-            AudioSource.PlayClipAtPoint(enemySound, this.transform.position);
+            AudioSource.PlayClipAtPoint(enemySound, this.transform.position, 1.5f);
             if(collision.gameObject.layer == LayerMask.NameToLayer("Bomb")){
                 Destroy(collision.gameObject);
             }
