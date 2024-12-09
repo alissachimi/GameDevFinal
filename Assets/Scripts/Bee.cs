@@ -10,6 +10,15 @@ public class Bee : MonoBehaviour
     private HashSet<int> processedBalloons = new HashSet<int>();
 
     public LayerMask mazeLayerMask; // Layer mask for the maze
+    public GameObject starPrefab;
+    public GameObject enemyColPrefab;
+    public AudioClip popSound; // Assign this in the inspector
+    public AudioClip enemySound;
+    private AudioSource audioSource;
+
+    void Start() {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -55,9 +64,20 @@ public class Bee : MonoBehaviour
             if (!processedBalloons.Contains(objectId))
             {
                 processedBalloons.Add(objectId);
+
+                // Instantiate the star prefab at the position of the balloon
+                GameObject star = Instantiate(starPrefab, collision.transform.position, Quaternion.Euler(-180, 90, 90));
+
+                // Destroy the balloon
                 Destroy(collision.gameObject);
+
+                // Add score and increment the balloon counter
                 Main.S.score += 10;
                 Main.S.numBalloonsPopped += 1;
+
+                // Destroy the star after 1 second
+                Destroy(star, 1.0f);
+                audioSource.PlayOneShot(popSound, .3f);
                 
                 // update player prefs if needed
                 if (Main.S.score > PlayerPrefs.GetInt("HighScore")){
@@ -68,6 +88,10 @@ public class Bee : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            GameObject enemy = Instantiate(enemyColPrefab, this.transform.position, Quaternion.Euler(-90, 0, 0));
+            
+            Destroy(enemy, 1.5f);
+            AudioSource.PlayClipAtPoint(enemySound, this.transform.position);
             if(collision.gameObject.layer == LayerMask.NameToLayer("Bomb")){
                 Destroy(collision.gameObject);
             }

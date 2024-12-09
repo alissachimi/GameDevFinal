@@ -39,10 +39,15 @@ public class Main : MonoBehaviour
     public GameObject[] levelObjects;
 
     public Button [] startButtons;
+    public Canvas levelCompleteCanvas;
+
+    public AudioClip levelUpSound;
+    private AudioSource audioSource;
     
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         score = 0;
         S = this;
         S.paused = false;
@@ -70,9 +75,16 @@ public class Main : MonoBehaviour
             scoreSlider.value = score;
 
             if(maxBalloonsForCurLevel == numBalloonsPopped){
-                IncreaseLevel();
+                paused = true;
+                Invoke("IncreaseLevelAudio", 1.0f);
+                levelCompleteCanvas.gameObject.SetActive(true);
+                Invoke("IncreaseLevel", 3.0f);
             }
         }
+    }
+
+    private void IncreaseLevelAudio() {
+        audioSource.PlayOneShot(levelUpSound);
     }
 
     public void SwitchScene(string sceneName) {
@@ -96,6 +108,8 @@ public class Main : MonoBehaviour
     }
 
     private void IncreaseLevel() {
+        levelCompleteCanvas.gameObject.SetActive(false);
+        paused = false;
         StartCoroutine(SetLevel(PlayerPrefs.GetInt("userId"), curLevel+1));
         // end game if we've done all of the levels
         if(curLevel == lastLevel){
