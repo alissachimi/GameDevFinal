@@ -7,7 +7,10 @@ public class Timer : MonoBehaviour
 
     public float timeRemaining = 240f; // 4 minutes in seconds
     public bool timerIsRunning = false;
-    public Text timerText; // Assign a UI Text element in the Inspector
+    public Text timerText;
+
+    public Canvas timerEndedCanvas;
+
 
     void Start()
     {
@@ -28,7 +31,8 @@ public class Timer : MonoBehaviour
             {
                 timeRemaining = 0;
                 timerIsRunning = false;
-                //TimerEnded();
+                Main.S.paused = true;
+                timerEndedCanvas.gameObject.SetActive(true);
             }
         }
     }
@@ -45,9 +49,4 @@ public class Timer : MonoBehaviour
             timerText.text = string.Format("{0}:{1:00}", minutes, seconds);
         }
     }
-
-    // void TimerEnded()
-    // {
-    //     Main.S.levelFailed();
-    // }
 }

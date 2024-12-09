@@ -168,4 +168,11 @@ public class Main : MonoBehaviour
             }
         }
     }
+
+    public void ContinueButtonClick(){
+        S.paused = false;
+        Timer.S.timeRemaining = 240f;
+        Timer.S.timerIsRunning = true;
+        Timer.S.timerEndedCanvas.gameObject.SetActive(false);
+    }
 }
