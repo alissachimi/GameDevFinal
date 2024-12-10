@@ -40,6 +40,7 @@ public class Main : MonoBehaviour
 
     public Button [] startButtons;
     public Canvas levelCompleteCanvas;
+    public Canvas exitMenuCanvas;
 
     public AudioClip levelUpSound;
     private AudioSource audioSource;
@@ -161,7 +162,19 @@ public class Main : MonoBehaviour
     }
 
     public void PauseButtonClick(){
-        S.paused = !S.paused;;
+        S.paused = !S.paused;
+    }
+
+    public void ExitButtonClick()
+    {
+        S.paused = true;
+        exitMenuCanvas.gameObject.SetActive(true);
+    }
+
+    public void ContinueButtonClickFromExit()
+    {
+        S.paused = false;
+        exitMenuCanvas.gameObject.SetActive(false);
     }
 
     IEnumerator SetLevel(int userId, int level)
